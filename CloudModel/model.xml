@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="4">
+		<struct>
+			<and abstract="true" mandatory="true" name="CloudDomain">
+				<and name="OperatingSystem">
+					<feature name="Windows"/>
+					<and name="Linux">
+						<feature name="Ubuntu"/>
+						<feature name="Debian"/>
+						<feature name="Fedora"/>
+						<feature name="SUSE"/>
+						<feature name="RedHat"/>
+					</and>
+				</and>
+				<and name="Storage">
+					<and name="BlockStorage">
+						<feature name="HDD"/>
+						<feature name="SSD"/>
+					</and>
+					<feature name="ObjectStorage"/>
+					<and name="Database">
+						<and name="Engine">
+							<and name="SQL">
+								<feature name="PostgresSQL"/>
+								<feature name="MySQL"/>
+								<feature name="Oracle"/>
+							</and>
+							<and name="NoSQL">
+								<feature name="DynamoDB"/>
+								<feature name="MongoDB"/>
+							</and>
+						</and>
+						<and name="Customization">
+							<feature name="HighAvailability"/>
+							<feature name="ReadReplica"/>
+						</and>
+					</and>
+					<and name="Cache">
+						<feature name="Memcache"/>
+						<feature name="Memcached"/>
+						<feature name="Redis"/>
+					</and>
+				</and>
+				<and name="ApplicationServices">
+					<feature name="Queues"/>
+					<feature name="Mailing"/>
+					<feature name="Notifications"/>
+					<feature name="Autoscaling"/>
+				</and>
+				<and name="Network">
+					<feature name="CDN"/>
+					<feature name="DNS"/>
+					<feature name="LoadBalancing"/>
+				</and>
+				<and name="Security">
+					<feature name="AccessControl"/>
+					<feature name="Certificates"/>
+					<feature name="Firewall"/>
+					<feature name="ActiveDirectory"/>
+				</and>
+				<feature name="Government"/>
+			</and>
+		</struct>
+		<constraints/>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>

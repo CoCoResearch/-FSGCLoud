@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="4">
+		<struct>
+			<and abstract="true" mandatory="true" name="AWSModel">
+				<and name="Compute">
+					<and name="EC2">
+						<and name="Linux">
+							<feature name="L_t2micro"/>
+							<feature name="L_t2medium"/>
+							<feature name="L_m4large"/>
+							<feature name="L_m4xlarge"/>
+							<feature name="L_m42xlarge"/>
+						</and>
+						<and name="Windows">
+							<feature name="W_t2micro"/>
+							<feature name="W_t2medium"/>
+							<feature name="W_m4large"/>
+							<feature name="W_m4xlarge"/>
+							<feature name="W_m42xlarge"/>
+						</and>
+					</and>
+				</and>
+				<and name="Storage">
+					<and name="EBS">
+						<and name="SSD">
+							<feature name="SSD_GeneralPurpose"/>
+							<feature name="SSD_ProvisionedIOPS"/>
+						</and>
+						<feature name="Magnetic"/>
+					</and>
+					<and name="ObjectStorage">
+						<feature name="S3"/>
+						<feature name="Glacier"/>
+					</and>
+					<and name="Database">
+						<and name="RDS">
+							<and name="RDS_Engine">
+								<feature name="PostgresSQL"/>
+								<feature name="MySQL"/>
+								<feature name="SQLServer"/>
+								<feature name="Oracle"/>
+								<feature name="MariaDB"/>
+							</and>
+							<and name="RDS_Customization">
+								<feature name="MultiAZ"/>
+								<feature name="ReadReplica"/>
+							</and>
+						</and>
+					</and>
+					<and name="ElastiCache">
+						<and name="ElastiCache_Engine">
+							<feature name="Redis"/>
+							<feature name="Memcached"/>
+						</and>
+						<and name="ElastiCache_NodeType">
+							<feature name="EC_t2micro"/>
+							<feature name="EC_t2medium"/>
+							<feature name="EC_m3large"/>
+							<feature name="EC_m3xlarge"/>
+							<feature name="EC_m32xlarge"/>
+						</and>
+					</and>
+				</and>
+				<and name="ApplicationServices">
+					<feature name="SQS"/>
+					<feature name="SES"/>
+					<feature name="SNS"/>
+					<feature name="AutoScaling"/>
+				</and>
+				<and name="Network">
+					<and name="CloudFront">
+						<or mandatory="true" name="CD_Region">
+							<feature mandatory="true" name="CF_UnitedStates"/>
+							<feature mandatory="true" name="CF_Europe"/>
+							<feature mandatory="true" name="CF_EasternAsia"/>
+							<feature mandatory="true" name="CF_Japan"/>
+							<feature mandatory="true" name="CF_SouthAmerica"/>
+							<feature mandatory="true" name="CF_Australia"/>
+							<feature mandatory="true" name="CF_India"/>
+						</or>
+					</and>
+					<and name="Route53">
+						<or name="R53_Queries">
+							<feature mandatory="true" name="R53_Standard"/>
+							<feature mandatory="true" name="R53_Latency"/>
+							<feature mandatory="true" name="R53_Geo"/>
+						</or>
+					</and>
+					<feature name="ELB"/>
+				</and>
+				<and name="Security">
+					<and name="IAM">
+						<and name="MFAuthentication">
+							<feature name="Virtual"/>
+							<feature name="HardwareKey"/>
+							<feature name="HardwareDisplay"/>
+							<feature name="SMS"/>
+						</and>
+						<feature name="UserCredentials"/>
+						<feature name="PermissionsAndPolicies"/>
+						<feature name="Federation"/>
+						<feature name="Roles"/>
+						<feature name="UsersAndGroups"/>
+					</and>
+					<feature name="CertificateManager"/>
+					<feature name="WAF"/>
+					<or name="DirectoryService">
+						<feature mandatory="true" name="MicrosoftAD"/>
+						<feature mandatory="true" name="SimpleAD"/>
+						<feature mandatory="true" name="ADConnector"/>
+					</or>
+				</and>
+			</and>
+		</struct>
+		<constraints/>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>
