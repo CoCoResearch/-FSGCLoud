@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="4">
+		<struct>
+			<and abstract="true" mandatory="true" name="GCEModel">
+				<and name="Compute">
+					<and name="GoogleCompute">
+						<and name="Linux">
+							<feature name="L_StandardMachines"/>
+							<feature name="L_MicroWCPUBursting"/>
+							<feature name="L_HighMemoryMachines"/>
+							<feature name="L_HighCPUMachines"/>
+						</and>
+						<and name="Windows">
+							<feature name="W_StandardMachines"/>
+							<feature name="W_MicroWCPUBursting"/>
+							<feature name="W_HighMemoryMachines"/>
+							<feature name="W_HighCPUMachines"/>
+						</and>
+					</and>
+				</and>
+				<and name="Storage">
+					<and name="PersistentDisk">
+						<feature name="StandardProvisionedSpace"/>
+						<feature name="SSDProvisionedSpace"/>
+						<feature name="SnapshotStorage"/>
+					</and>
+					<and name="ObjectStorage">
+						<and name="GoogleCloudStorageStandard">
+							<and name="Location">
+								<feature name="asia_east1"/>
+								<feature name="europe_west1"/>
+								<feature name="us_central1"/>
+								<feature name="us_east1"/>
+							</and>
+						</and>
+						<feature name="GoogleCloudStorageNearline"/>
+					</and>
+					<and name="Database">
+						<and name="SQL">
+							<and name="GoogleCloudSQL">
+								<feature name="MySQL"/>
+							</and>
+						</and>
+						<and name="NoSQL">
+							<feature name="GoogleCloudDatastore"/>
+							<feature name="GoogleCloudBigtable"/>
+						</and>
+					</and>
+				</and>
+				<and name="ApplicationServices">
+					<and name="Monitoring">
+						<feature name="GoogleCloudMonitoring"/>
+						<feature name="GoogleCloudLogging"/>
+					</and>
+					<and name="Queue">
+						<feature name="GoogleCloudPub_Sub"/>
+					</and>
+				</and>
+				<and name="Network">
+					<feature name="GoogleCloudDNS"/>
+					<feature name="GoogleDomains"/>
+					<and name="GoogleCloudLoadBalancing">
+						<feature name="HTTP_HTTPSLoadBalancing"/>
+						<feature name="NetworkLoadBalancing"/>
+					</and>
+				</and>
+			</and>
+		</struct>
+		<constraints/>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>
