@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 	<featureModel chosenLayoutAlgorithm="4">
 		<struct>
-			<and abstract="true" mandatory="true" name="GCEModel">
+			<and abstract="true" mandatory="true" name="GCModel">
 				<and name="Compute">
-					<and name="GoogleCompute">
+					<and name="GoogleComputeEngine">
 						<and name="Linux">
-							<feature name="L_StandardMachines"/>
-							<feature name="L_MicroWCPUBursting"/>
-							<feature name="L_HighMemoryMachines"/>
-							<feature name="L_HighCPUMachines"/>
+							<feature name="L_f1_micro"/>
+							<feature name="L_n1_standard1"/>
+							<feature name="L_n1_standard2"/>
+							<feature name="L_n1_standard4"/>
+							<feature name="L_n1_standard8"/>
 						</and>
 						<and name="Windows">
-							<feature name="W_StandardMachines"/>
-							<feature name="W_MicroWCPUBursting"/>
-							<feature name="W_HighMemoryMachines"/>
-							<feature name="W_HighCPUMachines"/>
+							<feature name="W_f1_micro"/>
+							<feature name="W_n1_standard1"/>
+							<feature name="W_n1_standard2"/>
+							<feature name="W_n1_standard4"/>
+							<feature name="W_n1_standard8"/>
 						</and>
 					</and>
 				</and>
