@@ -19,26 +19,28 @@
 					</and>
 					<feature name="ObjectStorage"/>
 					<and name="Database">
-						<and name="Engine">
-							<and name="SQL">
+						<or mandatory="true" name="DB_Engine">
+							<and mandatory="true" name="SQL">
 								<feature name="PostgresSQL"/>
 								<feature name="MySQL"/>
 								<feature name="Oracle"/>
 							</and>
-							<and name="NoSQL">
+							<and mandatory="true" name="NoSQL">
 								<feature name="DynamoDB"/>
 								<feature name="MongoDB"/>
 							</and>
-						</and>
-						<and name="Customization">
-							<feature name="HighAvailability"/>
-							<feature name="ReadReplica"/>
-						</and>
+						</or>
 					</and>
 					<and name="Cache">
-						<feature name="Memcache"/>
-						<feature name="Memcached"/>
-						<feature name="Redis"/>
+						<and name="Customization">
+							<feature name="HighAvailability"/>
+							<feature name="MasterSlave"/>
+						</and>
+						<and name="Cache_Engine">
+							<feature name="Memcache"/>
+							<feature name="Memcached"/>
+							<feature name="Redis"/>
+						</and>
 					</and>
 				</and>
 				<and name="ApplicationServices">
