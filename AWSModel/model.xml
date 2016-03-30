@@ -3,70 +3,93 @@
 		<struct>
 			<and abstract="true" mandatory="true" name="AWSModel">
 				<and name="Compute">
-					<and name="EC2">
-						<and name="Linux">
-							<feature name="L_t2micro"/>
-							<feature name="L_t2medium"/>
-							<feature name="L_m4large"/>
-							<feature name="L_m4xlarge"/>
-							<feature name="L_m42xlarge"/>
-						</and>
-						<and name="Windows">
-							<feature name="W_t2micro"/>
-							<feature name="W_t2medium"/>
-							<feature name="W_m4large"/>
-							<feature name="W_m4xlarge"/>
-							<feature name="W_m42xlarge"/>
-						</and>
-					</and>
+					<or mandatory="true" name="EC2">
+						<or mandatory="true" name="Linux">
+							<feature mandatory="true" name="L_t2micro"/>
+							<feature mandatory="true" name="L_t2medium"/>
+							<feature mandatory="true" name="L_m4large"/>
+							<feature mandatory="true" name="L_m4xlarge"/>
+							<feature mandatory="true" name="L_m42xlarge"/>
+						</or>
+						<or mandatory="true" name="Windows">
+							<feature mandatory="true" name="W_t2micro"/>
+							<feature mandatory="true" name="W_t2medium"/>
+							<feature mandatory="true" name="W_m4large"/>
+							<feature mandatory="true" name="W_m4xlarge"/>
+							<feature mandatory="true" name="W_m42xlarge"/>
+						</or>
+					</or>
 				</and>
-				<and name="Storage">
-					<and name="EBS">
-						<and name="SSD">
-							<feature name="SSD_GeneralPurpose"/>
-							<feature name="SSD_ProvisionedIOPS"/>
+				<or name="Storage">
+					<or mandatory="true" name="EBS">
+						<or mandatory="true" name="SSD">
+							<feature mandatory="true" name="SSD_GeneralPurpose"/>
+							<feature mandatory="true" name="SSD_ProvisionedIOPS"/>
+						</or>
+						<feature mandatory="true" name="Magnetic"/>
+					</or>
+					<or mandatory="true" name="ObjectStorage">
+						<feature mandatory="true" name="S3"/>
+						<feature mandatory="true" name="Glacier"/>
+					</or>
+					<or mandatory="true" name="Database">
+						<and mandatory="true" name="RDS">
+							<or mandatory="true" name="RDS_Engine">
+								<or mandatory="true" name="PostgresSQL">
+									<feature mandatory="true" name="PostgresSQL_dbt2micro"/>
+									<feature mandatory="true" name="PostgresSQL_dbt2medium"/>
+									<feature mandatory="true" name="PostgresSQL_dbm4large"/>
+									<feature mandatory="true" name="PostgresSQL_dbm4xlarge"/>
+									<feature mandatory="true" name="PostgresSQL_dbm42xlarge"/>
+								</or>
+								<or mandatory="true" name="MySQL">
+									<feature mandatory="true" name="MySQL_dbt2micro"/>
+									<feature mandatory="true" name="MySQL_dbt2medium"/>
+									<feature mandatory="true" name="MySQL_dbm4large"/>
+									<feature mandatory="true" name="MySQL_dbm4xlarge"/>
+									<feature mandatory="true" name="MySQL_dbm42xlarge"/>
+								</or>
+								<or mandatory="true" name="SQLServer">
+									<feature mandatory="true" name="SQLServer_dbt2micro"/>
+									<feature mandatory="true" name="SQLServer_dbt2medium"/>
+								</or>
+								<or mandatory="true" name="Oracle">
+									<feature mandatory="true" name="Oracle_dbt2micro"/>
+									<feature mandatory="true" name="Oracle_dbt2medium"/>
+									<feature mandatory="true" name="Oracle_dbm4large"/>
+									<feature mandatory="true" name="Oracle_dbm4xlarge"/>
+									<feature mandatory="true" name="Oracle_dbm42xlarge"/>
+								</or>
+							</or>
 						</and>
-						<feature name="Magnetic"/>
+					</or>
+					<and mandatory="true" name="ElastiCache">
+						<or mandatory="true" name="ElastiCache_Engine">
+							<feature mandatory="true" name="Redis"/>
+							<feature mandatory="true" name="Memcached"/>
+						</or>
+						<or mandatory="true" name="ElastiCache_NodeType">
+							<feature mandatory="true" name="EC_cachet2micro"/>
+							<feature mandatory="true" name="EC_cachet2medium"/>
+							<feature mandatory="true" name="EC_m3large"/>
+							<feature mandatory="true" name="EC_m3xlarge"/>
+							<feature mandatory="true" name="EC_m32xlarge"/>
+						</or>
 					</and>
-					<and name="ObjectStorage">
-						<feature name="S3"/>
-						<feature name="Glacier"/>
-					</and>
-					<and name="Database">
-						<and name="RDS">
-							<and name="RDS_Engine">
-								<feature name="PostgresSQL"/>
-								<feature name="MySQL"/>
-								<feature name="SQLServer"/>
-								<feature name="Oracle"/>
-								<feature name="MariaDB"/>
-							</and>
-							<and name="RDS_Customization">
-								<feature name="MultiAZ"/>
-								<feature name="ReadReplica"/>
-							</and>
-						</and>
-					</and>
-					<and name="ElastiCache">
-						<and name="ElastiCache_Engine">
-							<feature name="Redis"/>
-							<feature name="Memcached"/>
-						</and>
-						<and name="ElastiCache_NodeType">
-							<feature name="EC_t2micro"/>
-							<feature name="EC_t2medium"/>
-							<feature name="EC_m3large"/>
-							<feature name="EC_m3xlarge"/>
-							<feature name="EC_m32xlarge"/>
-						</and>
-					</and>
-				</and>
-				<and name="ApplicationServices">
-					<feature name="SQS"/>
-					<feature name="SES"/>
-					<feature name="SNS"/>
-					<feature name="AutoScaling"/>
-				</and>
+				</or>
+				<or name="ApplicationServices">
+					<feature mandatory="true" name="SQS"/>
+					<feature mandatory="true" name="SES"/>
+					<or mandatory="true" name="SNS">
+						<feature mandatory="true" name="SNS_Mobile"/>
+						<feature mandatory="true" name="SNS_SMS"/>
+						<feature mandatory="true" name="SNS_EmailJSON"/>
+						<feature mandatory="true" name="SNS_HTTP"/>
+						<feature mandatory="true" name="SNS_SQS"/>
+						<feature mandatory="true" name="SNS_Lambda"/>
+					</or>
+					<feature mandatory="true" name="AutoScaling"/>
+				</or>
 				<and name="Network">
 					<and name="CloudFront">
 						<or mandatory="true" name="CD_Region">
@@ -110,9 +133,52 @@
 						<feature mandatory="true" name="ADConnector"/>
 					</or>
 				</and>
+				<and name="Monitor">
+					<feature name="CloudWatch"/>
+				</and>
 			</and>
 		</struct>
-		<constraints/>
+		<constraints>
+			<rule>
+				<imp>
+					<disj>
+						<var>W_t2micro</var>
+						<disj>
+							<var>L_t2micro</var>
+							<disj>
+								<var>W_t2medium</var>
+								<disj>
+									<var>L_t2medium</var>
+									<disj>
+										<var>W_m4large</var>
+										<disj>
+											<var>L_m4large</var>
+											<disj>
+												<var>W_m4xlarge</var>
+												<disj>
+													<var>L_m4xlarge</var>
+													<disj>
+														<var>W_m42xlarge</var>
+														<var>L_m42xlarge</var>
+													</disj>
+												</disj>
+											</disj>
+										</disj>
+									</disj>
+								</disj>
+							</disj>
+						</disj>
+					</disj>
+					<var>EBS</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>AutoScaling</var>
+					<var>CloudWatch</var>
+				</imp>
+			</rule>
+		</constraints>
 		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
 		<comments/>
 		<featureOrder userDefined="false"/>
