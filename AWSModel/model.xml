@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 	<featureModel chosenLayoutAlgorithm="4">
 		<struct>
-			<and abstract="true" mandatory="true" name="AWSModel">
+			<and abstract="true" mandatory="true" name="AWS">
 				<and name="Compute">
 					<or mandatory="true" name="EC2">
 						<or mandatory="true" name="Linux">
@@ -62,6 +62,7 @@
 								</or>
 							</or>
 						</and>
+						<feature mandatory="true" name="DynamoDB"/>
 					</or>
 					<and mandatory="true" name="ElastiCache">
 						<or mandatory="true" name="ElastiCache_Engine">
@@ -103,7 +104,7 @@
 						</or>
 					</and>
 					<and name="Route53">
-						<or name="R53_Queries">
+						<or mandatory="true" name="R53_Queries">
 							<feature mandatory="true" name="R53_Standard"/>
 							<feature mandatory="true" name="R53_Latency"/>
 							<feature mandatory="true" name="R53_Geo"/>
@@ -111,30 +112,15 @@
 					</and>
 					<feature name="ELB"/>
 				</and>
-				<and name="Security">
-					<and name="IAM">
-						<and name="MFAuthentication">
-							<feature name="Virtual"/>
-							<feature name="HardwareKey"/>
-							<feature name="HardwareDisplay"/>
-							<feature name="SMS"/>
-						</and>
-						<feature name="UserCredentials"/>
-						<feature name="PermissionsAndPolicies"/>
-						<feature name="Federation"/>
-						<feature name="Roles"/>
-						<feature name="UsersAndGroups"/>
-					</and>
-					<feature name="CertificateManager"/>
-					<feature name="WAF"/>
-					<or name="DirectoryService">
-						<feature mandatory="true" name="MicrosoftAD"/>
-						<feature mandatory="true" name="SimpleAD"/>
-						<feature mandatory="true" name="ADConnector"/>
-					</or>
-				</and>
 				<and name="Monitor">
-					<feature name="CloudWatch"/>
+					<and mandatory="true" name="CloudWatch">
+						<feature name="CW_Dashboard"/>
+						<feature name="CW_EC2DetailedMonitoring"/>
+						<feature name="CW_CustomMetrics"/>
+						<feature name="CW_Alarms"/>
+						<feature name="CW_APIRequests"/>
+						<feature name="CW_Events"/>
+					</and>
 				</and>
 			</and>
 		</struct>

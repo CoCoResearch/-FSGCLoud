@@ -1,66 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 	<featureModel chosenLayoutAlgorithm="4">
 		<struct>
-			<and abstract="true" mandatory="true" name="CloudDomain">
-				<and name="OperatingSystem">
-					<feature name="Windows"/>
-					<and name="Linux">
-						<feature name="Ubuntu"/>
-						<feature name="Debian"/>
-						<feature name="Fedora"/>
-						<feature name="SUSE"/>
-						<feature name="RedHat"/>
-					</and>
-				</and>
-				<and name="Storage">
-					<and name="BlockStorage">
-						<feature name="HDD"/>
-						<feature name="SSD"/>
-					</and>
-					<feature name="ObjectStorage"/>
-					<and name="Database">
+			<and abstract="true" mandatory="true" name="Cloud">
+				<or name="OperatingSystem">
+					<feature mandatory="true" name="Windows"/>
+					<or mandatory="true" name="Linux">
+						<feature mandatory="true" name="Ubuntu"/>
+						<feature mandatory="true" name="Debian"/>
+						<feature mandatory="true" name="Fedora"/>
+						<feature mandatory="true" name="SUSE"/>
+						<feature mandatory="true" name="RedHat"/>
+					</or>
+				</or>
+				<or name="Storage">
+					<or mandatory="true" name="BlockStorage">
+						<feature mandatory="true" name="HDD"/>
+						<feature mandatory="true" name="SSD"/>
+					</or>
+					<feature mandatory="true" name="ObjectStorage"/>
+					<and mandatory="true" name="Database">
 						<or mandatory="true" name="DB_Engine">
-							<and mandatory="true" name="SQL">
-								<feature name="PostgresSQL"/>
-								<feature name="MySQL"/>
-								<feature name="Oracle"/>
-							</and>
-							<and mandatory="true" name="NoSQL">
-								<feature name="DynamoDB"/>
-								<feature name="MongoDB"/>
-							</and>
+							<or mandatory="true" name="SQL">
+								<feature mandatory="true" name="PostgresSQL"/>
+								<feature mandatory="true" name="MySQL"/>
+								<feature mandatory="true" name="SQLServer"/>
+								<feature mandatory="true" name="Oracle"/>
+							</or>
+							<or mandatory="true" name="NoSQL">
+								<feature mandatory="true" name="DynamoDB"/>
+								<feature mandatory="true" name="MongoDB"/>
+							</or>
 						</or>
 					</and>
-					<and name="Cache">
-						<and name="Customization">
-							<feature name="HighAvailability"/>
-							<feature name="MasterSlave"/>
-						</and>
-						<and name="Cache_Engine">
-							<feature name="Memcache"/>
-							<feature name="Memcached"/>
-							<feature name="Redis"/>
-						</and>
+					<and mandatory="true" name="Cache">
+						<or mandatory="true" name="Cache_Engine">
+							<feature mandatory="true" name="Memcache"/>
+							<feature mandatory="true" name="Memcached"/>
+							<feature mandatory="true" name="Redis"/>
+						</or>
 					</and>
-				</and>
-				<and name="ApplicationServices">
-					<feature name="Queues"/>
-					<feature name="Mailing"/>
-					<feature name="Notifications"/>
-					<feature name="Autoscaling"/>
-				</and>
-				<and name="Network">
-					<feature name="CDN"/>
-					<feature name="DNS"/>
-					<feature name="LoadBalancing"/>
-				</and>
-				<and name="Security">
-					<feature name="AccessControl"/>
-					<feature name="Certificates"/>
-					<feature name="Firewall"/>
-					<feature name="ActiveDirectory"/>
-				</and>
-				<feature name="Government"/>
+				</or>
+				<or name="ApplicationServices">
+					<feature mandatory="true" name="Queues"/>
+					<feature mandatory="true" name="Mailing"/>
+					<feature mandatory="true" name="Notifications"/>
+					<feature mandatory="true" name="Autoscaling"/>
+				</or>
+				<or name="Network">
+					<feature mandatory="true" name="CDN"/>
+					<feature mandatory="true" name="DNS"/>
+					<feature mandatory="true" name="LoadBalancing"/>
+				</or>
+				<or name="Monitoring">
+					<feature mandatory="true" name="Alarms"/>
+					<feature mandatory="true" name="Dashboard"/>
+					<or mandatory="true" name="Metrics">
+						<feature mandatory="true" name="CustomMetrics"/>
+						<feature mandatory="true" name="StandardMetrics"/>
+					</or>
+				</or>
 			</and>
 		</struct>
 		<constraints/>
