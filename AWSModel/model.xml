@@ -3,97 +3,97 @@
 		<struct>
 			<and abstract="true" mandatory="true" name="AWS">
 				<and name="Compute">
-					<or mandatory="true" name="EC2">
-						<or mandatory="true" name="Linux">
+					<alt mandatory="true" name="EC2">
+						<alt mandatory="true" name="Linux">
 							<feature mandatory="true" name="L_t2micro"/>
 							<feature mandatory="true" name="L_t2medium"/>
 							<feature mandatory="true" name="L_m4large"/>
 							<feature mandatory="true" name="L_m4xlarge"/>
 							<feature mandatory="true" name="L_m42xlarge"/>
-						</or>
-						<or mandatory="true" name="Windows">
+						</alt>
+						<alt mandatory="true" name="Windows">
 							<feature mandatory="true" name="W_t2micro"/>
 							<feature mandatory="true" name="W_t2medium"/>
 							<feature mandatory="true" name="W_m4large"/>
 							<feature mandatory="true" name="W_m4xlarge"/>
 							<feature mandatory="true" name="W_m42xlarge"/>
-						</or>
-					</or>
+						</alt>
+					</alt>
 				</and>
 				<or name="Storage">
-					<or mandatory="true" name="EBS">
-						<or mandatory="true" name="SSD">
+					<alt mandatory="true" name="EBS">
+						<alt mandatory="true" name="SSD">
 							<feature mandatory="true" name="SSD_GeneralPurpose"/>
 							<feature mandatory="true" name="SSD_ProvisionedIOPS"/>
-						</or>
+						</alt>
 						<feature mandatory="true" name="Magnetic"/>
-					</or>
-					<or mandatory="true" name="ObjectStorage">
+					</alt>
+					<alt mandatory="true" name="ObjectStorage">
 						<feature mandatory="true" name="S3"/>
 						<feature mandatory="true" name="Glacier"/>
-					</or>
-					<or mandatory="true" name="Database">
+					</alt>
+					<alt mandatory="true" name="Database">
 						<and mandatory="true" name="RDS">
-							<or mandatory="true" name="RDS_Engine">
-								<or mandatory="true" name="PostgresSQL">
+							<alt mandatory="true" name="RDS_Engine">
+								<alt mandatory="true" name="PostgresSQL">
 									<feature mandatory="true" name="PostgresSQL_dbt2micro"/>
 									<feature mandatory="true" name="PostgresSQL_dbt2medium"/>
 									<feature mandatory="true" name="PostgresSQL_dbm4large"/>
 									<feature mandatory="true" name="PostgresSQL_dbm4xlarge"/>
 									<feature mandatory="true" name="PostgresSQL_dbm42xlarge"/>
-								</or>
-								<or mandatory="true" name="MySQL">
+								</alt>
+								<alt mandatory="true" name="MySQL">
 									<feature mandatory="true" name="MySQL_dbt2micro"/>
 									<feature mandatory="true" name="MySQL_dbt2medium"/>
 									<feature mandatory="true" name="MySQL_dbm4large"/>
 									<feature mandatory="true" name="MySQL_dbm4xlarge"/>
 									<feature mandatory="true" name="MySQL_dbm42xlarge"/>
-								</or>
-								<or mandatory="true" name="SQLServer">
+								</alt>
+								<alt mandatory="true" name="SQLServer">
 									<feature mandatory="true" name="SQLServer_dbt2micro"/>
 									<feature mandatory="true" name="SQLServer_dbt2medium"/>
-								</or>
-								<or mandatory="true" name="Oracle">
+								</alt>
+								<alt mandatory="true" name="Oracle">
 									<feature mandatory="true" name="Oracle_dbt2micro"/>
 									<feature mandatory="true" name="Oracle_dbt2medium"/>
 									<feature mandatory="true" name="Oracle_dbm4large"/>
 									<feature mandatory="true" name="Oracle_dbm4xlarge"/>
 									<feature mandatory="true" name="Oracle_dbm42xlarge"/>
-								</or>
-							</or>
+								</alt>
+							</alt>
 						</and>
 						<feature mandatory="true" name="DynamoDB"/>
-					</or>
+					</alt>
 					<and mandatory="true" name="ElastiCache">
-						<or mandatory="true" name="ElastiCache_Engine">
+						<alt mandatory="true" name="ElastiCache_Engine">
 							<feature mandatory="true" name="Redis"/>
 							<feature mandatory="true" name="Memcached"/>
-						</or>
-						<or mandatory="true" name="ElastiCache_NodeType">
+						</alt>
+						<alt mandatory="true" name="ElastiCache_NodeType">
 							<feature mandatory="true" name="EC_cachet2micro"/>
 							<feature mandatory="true" name="EC_cachet2medium"/>
 							<feature mandatory="true" name="EC_m3large"/>
 							<feature mandatory="true" name="EC_m3xlarge"/>
 							<feature mandatory="true" name="EC_m32xlarge"/>
-						</or>
+						</alt>
 					</and>
 				</or>
 				<or name="ApplicationServices">
 					<feature mandatory="true" name="SQS"/>
 					<feature mandatory="true" name="SES"/>
-					<or mandatory="true" name="SNS">
+					<alt mandatory="true" name="SNS">
 						<feature mandatory="true" name="SNS_Mobile"/>
 						<feature mandatory="true" name="SNS_SMS"/>
 						<feature mandatory="true" name="SNS_EmailJSON"/>
 						<feature mandatory="true" name="SNS_HTTP"/>
 						<feature mandatory="true" name="SNS_SQS"/>
 						<feature mandatory="true" name="SNS_Lambda"/>
-					</or>
+					</alt>
 					<feature mandatory="true" name="AutoScaling"/>
 				</or>
 				<and name="Network">
 					<and name="CloudFront">
-						<or mandatory="true" name="CD_Region">
+						<alt mandatory="true" name="CD_Region">
 							<feature mandatory="true" name="CF_UnitedStates"/>
 							<feature mandatory="true" name="CF_Europe"/>
 							<feature mandatory="true" name="CF_EasternAsia"/>
@@ -101,14 +101,14 @@
 							<feature mandatory="true" name="CF_SouthAmerica"/>
 							<feature mandatory="true" name="CF_Australia"/>
 							<feature mandatory="true" name="CF_India"/>
-						</or>
+						</alt>
 					</and>
 					<and name="Route53">
-						<or mandatory="true" name="R53_Queries">
+						<alt mandatory="true" name="R53_Queries">
 							<feature mandatory="true" name="R53_Standard"/>
 							<feature mandatory="true" name="R53_Latency"/>
 							<feature mandatory="true" name="R53_Geo"/>
-						</or>
+						</alt>
 					</and>
 					<feature name="ELB"/>
 				</and>

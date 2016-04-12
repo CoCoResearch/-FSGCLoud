@@ -2,42 +2,42 @@
 	<featureModel chosenLayoutAlgorithm="4">
 		<struct>
 			<and abstract="true" mandatory="true" name="Cloud">
-				<or name="OperatingSystem">
+				<alt name="OperatingSystem">
 					<feature mandatory="true" name="Windows"/>
-					<or mandatory="true" name="Linux">
+					<alt mandatory="true" name="Linux">
 						<feature mandatory="true" name="Ubuntu"/>
 						<feature mandatory="true" name="Debian"/>
 						<feature mandatory="true" name="Fedora"/>
 						<feature mandatory="true" name="SUSE"/>
 						<feature mandatory="true" name="RedHat"/>
-					</or>
-				</or>
+					</alt>
+				</alt>
 				<or name="Storage">
-					<or mandatory="true" name="BlockStorage">
+					<alt mandatory="true" name="BlockStorage">
 						<feature mandatory="true" name="HDD"/>
 						<feature mandatory="true" name="SSD"/>
-					</or>
+					</alt>
 					<feature mandatory="true" name="ObjectStorage"/>
 					<and mandatory="true" name="Database">
-						<or mandatory="true" name="DB_Engine">
-							<or mandatory="true" name="SQL">
+						<alt mandatory="true" name="DB_Engine">
+							<alt mandatory="true" name="SQL">
 								<feature mandatory="true" name="PostgresSQL"/>
 								<feature mandatory="true" name="MySQL"/>
 								<feature mandatory="true" name="SQLServer"/>
 								<feature mandatory="true" name="Oracle"/>
-							</or>
-							<or mandatory="true" name="NoSQL">
+							</alt>
+							<alt mandatory="true" name="NoSQL">
 								<feature mandatory="true" name="DynamoDB"/>
 								<feature mandatory="true" name="MongoDB"/>
-							</or>
-						</or>
+							</alt>
+						</alt>
 					</and>
 					<and mandatory="true" name="Cache">
-						<or mandatory="true" name="Cache_Engine">
+						<alt mandatory="true" name="Cache_Engine">
 							<feature mandatory="true" name="Memcache"/>
 							<feature mandatory="true" name="Memcached"/>
 							<feature mandatory="true" name="Redis"/>
-						</or>
+						</alt>
 					</and>
 				</or>
 				<or name="ApplicationServices">
@@ -54,10 +54,10 @@
 				<or name="Monitoring">
 					<feature mandatory="true" name="Alarms"/>
 					<feature mandatory="true" name="Dashboard"/>
-					<or mandatory="true" name="Metrics">
+					<alt mandatory="true" name="Metrics">
 						<feature mandatory="true" name="CustomMetrics"/>
 						<feature mandatory="true" name="StandardMetrics"/>
-					</or>
+					</alt>
 				</or>
 			</and>
 		</struct>
