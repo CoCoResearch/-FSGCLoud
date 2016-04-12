@@ -58,6 +58,7 @@
 						<feature mandatory="true" name="CustomMetrics"/>
 						<feature mandatory="true" name="StandardMetrics"/>
 					</alt>
+					<feature mandatory="true" name="Logs"/>
 				</or>
 			</and>
 		</struct>

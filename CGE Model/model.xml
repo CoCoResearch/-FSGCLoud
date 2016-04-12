@@ -1,71 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 	<featureModel chosenLayoutAlgorithm="4">
 		<struct>
-			<and abstract="true" mandatory="true" name="GCModel">
+			<and abstract="true" mandatory="true" name="GC">
 				<and name="Compute">
-					<and name="GoogleComputeEngine">
-						<and name="Linux">
-							<feature name="L_f1_micro"/>
-							<feature name="L_n1_standard1"/>
-							<feature name="L_n1_standard2"/>
-							<feature name="L_n1_standard4"/>
-							<feature name="L_n1_standard8"/>
-						</and>
-						<and name="Windows">
-							<feature name="W_f1_micro"/>
-							<feature name="W_n1_standard1"/>
-							<feature name="W_n1_standard2"/>
-							<feature name="W_n1_standard4"/>
-							<feature name="W_n1_standard8"/>
-						</and>
-					</and>
+					<alt mandatory="true" name="GoogleComputeEngine">
+						<alt mandatory="true" name="Linux">
+							<feature mandatory="true" name="L_f1_micro"/>
+							<feature mandatory="true" name="L_n1_standard1"/>
+							<feature mandatory="true" name="L_n1_standard2"/>
+							<feature mandatory="true" name="L_n1_standard4"/>
+							<feature mandatory="true" name="L_n1_standard8"/>
+						</alt>
+						<alt mandatory="true" name="Windows">
+							<feature mandatory="true" name="W_f1_micro"/>
+							<feature mandatory="true" name="W_n1_standard1"/>
+							<feature mandatory="true" name="W_n1_standard2"/>
+							<feature mandatory="true" name="W_n1_standard4"/>
+							<feature mandatory="true" name="W_n1_standard8"/>
+						</alt>
+					</alt>
 				</and>
-				<and name="Storage">
-					<and name="PersistentDisk">
-						<feature name="StandardProvisionedSpace"/>
-						<feature name="SSDProvisionedSpace"/>
-						<feature name="SnapshotStorage"/>
-					</and>
-					<and name="ObjectStorage">
-						<and name="GoogleCloudStorageStandard">
-							<and name="Location">
-								<feature name="asia_east1"/>
-								<feature name="europe_west1"/>
-								<feature name="us_central1"/>
-								<feature name="us_east1"/>
-							</and>
+				<or name="Storage">
+					<alt mandatory="true" name="PersistentDisk">
+						<feature mandatory="true" name="StandardProvisionedSpace"/>
+						<feature mandatory="true" name="SSDProvisionedSpace"/>
+					</alt>
+					<alt mandatory="true" name="ObjectStorage">
+						<feature mandatory="true" name="GCStandardStorage"/>
+						<feature mandatory="true" name="GCNearlineStorage"/>
+					</alt>
+					<alt mandatory="true" name="Database">
+						<and mandatory="true" name="SQL">
+							<alt mandatory="true" name="MySQL">
+								<feature mandatory="true" name="MySQL_db_f1_micro"/>
+								<feature mandatory="true" name="MySQL_db_n1_standard1"/>
+								<feature mandatory="true" name="MySQL_db_n1_standard2"/>
+								<feature mandatory="true" name="MySQL_db_n1_standard4"/>
+								<feature mandatory="true" name="MySQL_db_n1_standard8"/>
+							</alt>
 						</and>
-						<feature name="GoogleCloudStorageNearline"/>
-					</and>
-					<and name="Database">
-						<and name="SQL">
-							<and name="GoogleCloudSQL">
-								<feature name="MySQL"/>
-							</and>
-						</and>
-						<and name="NoSQL">
-							<feature name="GoogleCloudDatastore"/>
-							<feature name="GoogleCloudBigtable"/>
-						</and>
-					</and>
-				</and>
-				<and name="ApplicationServices">
-					<and name="Monitoring">
-						<feature name="GoogleCloudMonitoring"/>
-						<feature name="GoogleCloudLogging"/>
-					</and>
-					<and name="Queue">
-						<feature name="GoogleCloudPub_Sub"/>
-					</and>
-				</and>
-				<and name="Network">
-					<feature name="GoogleCloudDNS"/>
-					<feature name="GoogleDomains"/>
-					<and name="GoogleCloudLoadBalancing">
-						<feature name="HTTP_HTTPSLoadBalancing"/>
-						<feature name="NetworkLoadBalancing"/>
-					</and>
-				</and>
+						<alt mandatory="true" name="NoSQL">
+							<feature mandatory="true" name="Datastore"/>
+							<feature mandatory="true" name="Bigtable"/>
+						</alt>
+					</alt>
+				</or>
+				<or name="ApplicationServices">
+					<feature mandatory="true" name="Pub_Sub"/>
+					<feature mandatory="true" name="Autoscaling"/>
+				</or>
+				<or name="Network">
+					<feature mandatory="true" name="CDN"/>
+					<feature mandatory="true" name="DNS"/>
+					<alt mandatory="true" name="LoadBalancing">
+						<feature mandatory="true" name="HTTP_HTTPSLoadBalancing"/>
+						<feature mandatory="true" name="NetworkLoadBalancing"/>
+					</alt>
+				</or>
+				<or name="Monitoring">
+					<feature mandatory="true" name="GCMonitoring"/>
+					<feature mandatory="true" name="GCLogging"/>
+					<feature mandatory="true" name="GCDashboard"/>
+				</or>
 			</and>
 		</struct>
 		<constraints/>
