@@ -1,79 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 	<featureModel chosenLayoutAlgorithm="4">
 		<struct>
-			<and abstract="true" mandatory="true" name="AzureModel">
+			<and abstract="true" mandatory="true" name="Azure">
 				<and name="Compute">
 					<alt mandatory="true" name="VirtualMachines">
-						<and mandatory="true" name="Linux">
-							<feature name="L_A0"/>
-							<feature name="L_A2"/>
-							<feature name="L_A3"/>
-							<feature name="L_A5"/>
-							<feature name="L_A6"/>
-						</and>
-						<and mandatory="true" name="Windows">
-							<feature name="W_A0"/>
-							<feature name="W_A2"/>
-							<feature name="W_A3"/>
-							<feature name="W_A5"/>
-							<feature name="W_A6"/>
-						</and>
+						<alt mandatory="true" name="Linux">
+							<feature mandatory="true" name="L_A0"/>
+							<feature mandatory="true" name="L_A2"/>
+							<feature mandatory="true" name="L_A3"/>
+							<feature mandatory="true" name="L_A5"/>
+							<feature mandatory="true" name="L_A6"/>
+						</alt>
+						<alt mandatory="true" name="Windows">
+							<feature mandatory="true" name="W_A0"/>
+							<feature mandatory="true" name="W_A2"/>
+							<feature mandatory="true" name="W_A3"/>
+							<feature mandatory="true" name="W_A5"/>
+							<feature mandatory="true" name="W_A6"/>
+						</alt>
 					</alt>
 				</and>
 				<or name="Storage">
-					<alt mandatory="true" name="VirtualServerDisk">
-						<feature mandatory="true" name="PageBlobs"/>
-						<feature mandatory="true" name="PremiumStorage"/>
+					<alt mandatory="true" name="Disks">
+						<feature mandatory="true" name="StandardDisks"/>
+						<alt mandatory="true" name="PremiumDisks">
+							<feature mandatory="true" name="PD_P10"/>
+							<feature mandatory="true" name="PD_P20"/>
+							<feature mandatory="true" name="PD_P30"/>
+						</alt>
 					</alt>
-					<and mandatory="true" name="ObjectStorage">
-						<feature name="BlobStorage"/>
-					</and>
+					<feature mandatory="true" name="BlockBlobs"/>
 					<alt mandatory="true" name="Database">
 						<alt mandatory="true" name="SQLDatabase">
-							<feature mandatory="true" name="SingleDatabase"/>
+							<alt mandatory="true" name="SingleDatabase">
+								<feature mandatory="true" name="SD_S0"/>
+								<feature mandatory="true" name="SD_S1"/>
+								<feature mandatory="true" name="SD_S2"/>
+								<feature mandatory="true" name="SD_S3"/>
+							</alt>
 							<alt mandatory="true" name="ElasticDatabase">
-								<feature mandatory="true" name="I_100"/>
-								<feature mandatory="true" name="I_200"/>
-								<feature mandatory="true" name="I_400"/>
-								<feature mandatory="true" name="I_800"/>
-								<feature mandatory="true" name="I_1200"/>
+								<feature mandatory="true" name="ED_100"/>
+								<feature mandatory="true" name="ED_200"/>
+								<feature mandatory="true" name="ED_400"/>
+								<feature mandatory="true" name="ED_800"/>
+								<feature mandatory="true" name="ED_1200"/>
 							</alt>
 						</alt>
-						<feature mandatory="true" name="DocumentDB"/>
+						<alt mandatory="true" name="DocumentDB">
+							<feature mandatory="true" name="Doc_S1"/>
+							<feature mandatory="true" name="Doc_S2"/>
+							<feature mandatory="true" name="Doc_S3"/>
+						</alt>
 					</alt>
-					<alt mandatory="true" name="AzureRedisCache">
-						<feature mandatory="true" name="C0"/>
-						<feature mandatory="true" name="C1"/>
-						<feature mandatory="true" name="C2"/>
-						<feature mandatory="true" name="C3"/>
-						<feature mandatory="true" name="C4"/>
-						<feature mandatory="true" name="C5"/>
-						<feature mandatory="true" name="C6"/>
+					<alt mandatory="true" name="RedisCache">
+						<feature mandatory="true" name="Redis_C1"/>
+						<feature mandatory="true" name="Redis_C2"/>
+						<feature mandatory="true" name="Redis_C3"/>
+						<feature mandatory="true" name="Redis_C4"/>
+						<feature mandatory="true" name="Redis_C5"/>
 					</alt>
 				</or>
 				<or name="ApplicationServices">
-					<or mandatory="true" name="Queue">
-						<feature mandatory="true" name="QueueStorage"/>
-						<feature mandatory="true" name="ServiceBusQueues"/>
-					</or>
+					<feature mandatory="true" name="Queues"/>
 					<feature mandatory="true" name="NotificationHubs"/>
-					<feature mandatory="true" name="AppServiceAutoScalling"/>
-					<feature mandatory="true" name="VMScale"/>
+					<feature mandatory="true" name="Autoscaling"/>
 				</or>
 				<or name="Network">
 					<and mandatory="true" name="ContentDeliveryNetwork">
-						<alt name="CDN_Zone">
-							<feature mandatory="true" name="US_Europe"/>
-							<feature mandatory="true" name="AsiaPacific_Japan"/>
-							<feature mandatory="true" name="Brazil"/>
-							<feature mandatory="true" name="Australia"/>
-							<feature mandatory="true" name="India"/>
+						<alt mandatory="true" name="CDN_Zone">
+							<feature mandatory="true" name="CDN_US_Europe"/>
+							<feature mandatory="true" name="CDN_AsiaPacific_Japan"/>
+							<feature mandatory="true" name="CDN_Brazil"/>
+							<feature mandatory="true" name="CDN_Australia"/>
+							<feature mandatory="true" name="CDN_India"/>
 						</alt>
 					</and>
-					<or mandatory="true" name="DNS">
-						<feature mandatory="true" name="AzureDNS"/>
-						<feature mandatory="true" name="TrafficManager"/>
-					</or>
+					<feature mandatory="true" name="DNS"/>
 					<or mandatory="true" name="LoadBalancing">
 						<feature mandatory="true" name="LoadBalancer"/>
 						<feature mandatory="true" name="ApplicationGateway"/>
@@ -82,6 +84,10 @@
 				<or name="Monitor">
 					<feature mandatory="true" name="LogAnalytics"/>
 					<feature mandatory="true" name="ApplicationInsights"/>
+					<alt mandatory="true" name="Metrics">
+						<feature mandatory="true" name="CustomMetrics"/>
+						<feature mandatory="true" name="StandardMetrics"/>
+					</alt>
 				</or>
 			</and>
 		</struct>

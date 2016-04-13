@@ -127,41 +127,68 @@
 		<constraints>
 			<rule>
 				<imp>
-					<disj>
-						<var>W_t2micro</var>
-						<disj>
-							<var>L_t2micro</var>
-							<disj>
-								<var>W_t2medium</var>
-								<disj>
-									<var>L_t2medium</var>
-									<disj>
-										<var>W_m4large</var>
-										<disj>
-											<var>L_m4large</var>
-											<disj>
-												<var>W_m4xlarge</var>
-												<disj>
-													<var>L_m4xlarge</var>
-													<disj>
-														<var>W_m42xlarge</var>
-														<var>L_m42xlarge</var>
-													</disj>
-												</disj>
-											</disj>
-										</disj>
-									</disj>
-								</disj>
-							</disj>
-						</disj>
-					</disj>
+					<var>AutoScaling</var>
+					<var>CloudWatch</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>W_t2micro</var>
 					<var>EBS</var>
 				</imp>
 			</rule>
 			<rule>
 				<imp>
-					<var>AutoScaling</var>
-					<var>CloudWatch</var>
+					<var>L_t2micro</var>
+					<var>EBS</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>W_t2medium</var>
+					<var>EBS</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>L_t2medium</var>
+					<var>EBS</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>W_m4large</var>
+					<var>EBS</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>L_m4large</var>
+					<var>EBS</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>W_m4xlarge</var>
+					<var>EBS</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>L_m4xlarge</var>
+					<var>EBS</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>W_m42xlarge</var>
+					<var>EBS</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>L_m42xlarge</var>
+					<var>EBS</var>
 				</imp>
 			</rule>
 		</constraints>
