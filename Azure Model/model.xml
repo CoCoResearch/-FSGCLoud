@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="4">
+		<struct>
+			<and abstract="true" mandatory="true" name="AzureModel">
+				<and name="Compute">
+					<alt mandatory="true" name="VirtualMachines">
+						<and mandatory="true" name="Linux">
+							<feature name="L_A0"/>
+							<feature name="L_A2"/>
+							<feature name="L_A3"/>
+							<feature name="L_A5"/>
+							<feature name="L_A6"/>
+						</and>
+						<and mandatory="true" name="Windows">
+							<feature name="W_A0"/>
+							<feature name="W_A2"/>
+							<feature name="W_A3"/>
+							<feature name="W_A5"/>
+							<feature name="W_A6"/>
+						</and>
+					</alt>
+				</and>
+				<or name="Storage">
+					<alt mandatory="true" name="VirtualServerDisk">
+						<feature mandatory="true" name="PageBlobs"/>
+						<feature mandatory="true" name="PremiumStorage"/>
+					</alt>
+					<and mandatory="true" name="ObjectStorage">
+						<feature name="BlobStorage"/>
+					</and>
+					<alt mandatory="true" name="Database">
+						<alt mandatory="true" name="SQLDatabase">
+							<feature mandatory="true" name="SingleDatabase"/>
+							<alt mandatory="true" name="ElasticDatabase">
+								<feature mandatory="true" name="I_100"/>
+								<feature mandatory="true" name="I_200"/>
+								<feature mandatory="true" name="I_400"/>
+								<feature mandatory="true" name="I_800"/>
+								<feature mandatory="true" name="I_1200"/>
+							</alt>
+						</alt>
+						<feature mandatory="true" name="DocumentDB"/>
+					</alt>
+					<alt mandatory="true" name="AzureRedisCache">
+						<feature mandatory="true" name="C0"/>
+						<feature mandatory="true" name="C1"/>
+						<feature mandatory="true" name="C2"/>
+						<feature mandatory="true" name="C3"/>
+						<feature mandatory="true" name="C4"/>
+						<feature mandatory="true" name="C5"/>
+						<feature mandatory="true" name="C6"/>
+					</alt>
+				</or>
+				<or name="ApplicationServices">
+					<or mandatory="true" name="Queue">
+						<feature mandatory="true" name="QueueStorage"/>
+						<feature mandatory="true" name="ServiceBusQueues"/>
+					</or>
+					<feature mandatory="true" name="NotificationHubs"/>
+					<feature mandatory="true" name="AppServiceAutoScalling"/>
+					<feature mandatory="true" name="VMScale"/>
+				</or>
+				<or name="Network">
+					<and mandatory="true" name="ContentDeliveryNetwork">
+						<alt name="CDN_Zone">
+							<feature mandatory="true" name="US_Europe"/>
+							<feature mandatory="true" name="AsiaPacific_Japan"/>
+							<feature mandatory="true" name="Brazil"/>
+							<feature mandatory="true" name="Australia"/>
+							<feature mandatory="true" name="India"/>
+						</alt>
+					</and>
+					<or mandatory="true" name="DNS">
+						<feature mandatory="true" name="AzureDNS"/>
+						<feature mandatory="true" name="TrafficManager"/>
+					</or>
+					<or mandatory="true" name="LoadBalancing">
+						<feature mandatory="true" name="LoadBalancer"/>
+						<feature mandatory="true" name="ApplicationGateway"/>
+					</or>
+				</or>
+				<or name="Monitor">
+					<feature mandatory="true" name="LogAnalytics"/>
+					<feature mandatory="true" name="ApplicationInsights"/>
+				</or>
+			</and>
+		</struct>
+		<constraints/>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>
