@@ -22,6 +22,6 @@ Solution_Constraints {
 	selectionState R4: cl_storage_object mandatory;
 	selectionState R5: cl_messaging_notification mandatory;
 	selectionState R6: cl_audit mandatory;
-	selectionState R6: cl_authentication mandatory;
+	selectionState R7: cl_authentication mandatory;
 }
 
