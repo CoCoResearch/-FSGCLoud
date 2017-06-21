@@ -19,7 +19,7 @@ import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.Variable;
 import org.chocosolver.solver.variables.VariableFactory;
 
-public class MultiCloud {
+public class MultiCloudAdapted {
 	private static Solver solver;
 	private static BoolVar cl_cloud;
 	private static BoolVar cl_authentication;
@@ -396,19 +396,7 @@ public class MultiCloud {
 		Constraint optionalcl_aws_compute_cl_aws_compute_container_service = IntConstraintFactory.arithm(cl_aws_compute_container_service, "<=", cl_aws_compute);
 		optionalcl_aws_compute_cl_aws_compute_container_service.setName(Utilities.OPTIONAL_TC);
 		solver.post(optionalcl_aws_compute_cl_aws_compute_container_service);
-		IntVar sumXorcl_aws_compute_ec2_0 = VariableFactory.fixed("sumXorcl_aws_compute_ec2", 1, solver);
-		BoolVar[] varsXorcl_aws_compute_ec2_0 = new BoolVar[2];
-		varsXorcl_aws_compute_ec2_0[0] = cl_aws_compute_ec2_windows;
-		varsXorcl_aws_compute_ec2_0[1] = cl_compute_ec2_linux;
-		solver.post(IntConstraintFactory.sum(varsXorcl_aws_compute_ec2_0, sumXorcl_aws_compute_ec2_0));
-		Constraint xor1cl_aws_compute_ec2_0 = IntConstraintFactory.arithm(sumXorcl_aws_compute_ec2_0, "=", 1);
-		xor1cl_aws_compute_ec2_0.setName(Utilities.XOR_TC);
-
-		Constraint xor0cl_aws_compute_ec2_0 = IntConstraintFactory.arithm(sumXorcl_aws_compute_ec2_0, "=", 0);
-		xor0cl_aws_compute_ec2_0.setName(Utilities.XOR_TC);
-
-		LogicalConstraintFactory.ifThenElse(cl_aws_compute_ec2, xor1cl_aws_compute_ec2_0, xor0cl_aws_compute_ec2_0);
-
+		
 		IntVar sumOrcl_aws_storage_0 = VariableFactory.enumerated("sumOrcl_aws_storage", 0, 3, solver); 
 		BoolVar[] varsOrcl_aws_storage_0 = new BoolVar[3];
 		varsOrcl_aws_storage_0[0] = cl_aws_storage_s3;
@@ -750,7 +738,7 @@ public class MultiCloud {
 		cl_monitoring = VariableFactory.bool("feature_cl_monitoring", solver);
 		cl_audit = VariableFactory.bool("feature_cl_audit", solver);
 		cl_aws = (BoolVar) VariableFactory.fixed("feature_cl_aws", 1, solver);
-		cl_aws_compute = VariableFactory.bool("feature_cl_aws_compute", solver);
+		cl_aws_compute = (BoolVar) VariableFactory.fixed("feature_cl_aws_compute", 0, solver);
 		cl_aws_compute_ec2 = VariableFactory.bool("feature_cl_aws_compute_ec2", solver);
 		cl_aws_compute_ec2_windows = VariableFactory.bool("feature_cl_aws_compute_ec2_windows", solver);
 		cl_compute_ec2_linux = VariableFactory.bool("feature_cl_compute_ec2_linux", solver);
@@ -838,8 +826,8 @@ public class MultiCloud {
 		LogicalConstraintFactory.or(IntConstraintFactory.arithm(featureAttrprovider_support.get("cl_aws"), ">=", 2), IntConstraintFactory.arithm(featureAttrprovider_support.get("cl_aws"), "=", 0));
 		LogicalConstraintFactory.ifThen(IntConstraintFactory.arithm(cl_aws, "=", 0), IntConstraintFactory.arithm(featureAttrprovider_support.get("cl_aws"), "=", 0));
 		LogicalConstraintFactory.ifThen(IntConstraintFactory.arithm(cl_aws, "=", 1), IntConstraintFactory.arithm(featureAttrprovider_support.get("cl_aws"), "!=", 0));
-		featureAttrsla.put("cl_aws_compute_ec2", VariableFactory.enumerated("cl_aws_compute_ec2sla", new int[]{0, 9995}, solver));
-		LogicalConstraintFactory.or(IntConstraintFactory.arithm(featureAttrsla.get("cl_aws_compute_ec2"), ">=", 9995), IntConstraintFactory.arithm(featureAttrsla.get("cl_aws_compute_ec2"), "=", 0));
+		featureAttrsla.put("cl_aws_compute_ec2", VariableFactory.enumerated("cl_aws_compute_ec2sla", new int[]{0, 9400}, solver));
+		LogicalConstraintFactory.or(IntConstraintFactory.arithm(featureAttrsla.get("cl_aws_compute_ec2"), ">=", 9400), IntConstraintFactory.arithm(featureAttrsla.get("cl_aws_compute_ec2"), "=", 0));
 		LogicalConstraintFactory.ifThen(IntConstraintFactory.arithm(cl_aws_compute_ec2, "=", 0), IntConstraintFactory.arithm(featureAttrsla.get("cl_aws_compute_ec2"), "=", 0));
 		LogicalConstraintFactory.ifThen(IntConstraintFactory.arithm(cl_aws_compute_ec2, "=", 1), IntConstraintFactory.arithm(featureAttrsla.get("cl_aws_compute_ec2"), "!=", 0));
 		featureAttrelasticity.put("cl_aws_compute_ec2", VariableFactory.enumerated("cl_aws_compute_ec2elasticity", new int[]{0, 1}, solver));
